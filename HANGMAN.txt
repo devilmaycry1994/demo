@@ -1,0 +1,257 @@
+#include <cstdlib>
+#include <conio.h>
+#include <iostream>
+#include <graphics.h>
+#include<string.h>
+using namespace std;
+
+void one();
+void two();
+void three();
+void four();
+void five();
+void six();
+
+void one()
+{
+   
+    
+    
+    bar(970,100,980,600);                //first
+    bar(920,600,1250,610);
+
+}
+void two()
+{
+    one(); 
+    bar(970,90,1200,100);               //second
+ 
+}
+void three()
+{
+    two();
+    setfillstyle(4,WHITE);
+    bar(1082,90,1118,100);
+ 
+    setfillstyle(4,BROWN);
+    bar(1098,100,1103,150);                  //third
+}
+void four()
+{
+    three();
+    circle(1100,200,50);                   //fourth
+    circle(1080,185,2);
+    circle(1120,185,2);
+    line(1100,200,1100,210);
+    line(1085,233,1115,233);
+}
+void five()
+{
+    four();
+    line(1100,250,1100,325);               
+    line(1100,325,1138,311);
+    line(1100-38,325-14,1100,325);
+    line(1138,311,1154,253);               //fifth
+    line(1062,311,1062-16,253);
+}
+void six()
+{
+    five(); 
+    line(1100,325,1100,430);
+    line(1100,430,1100+63,430+108);        //sixth
+    line(1100,430,1100-63,430+108);
+}
+
+void last()
+{
+     initwindow(1366,720,"Hangman");
+    
+    bar(970,100,980,600);                //first
+    bar(920,600,1250,610);
+    
+    bar(970,90,1200,100);               //second
+    
+   
+    setfillstyle(4,WHITE);
+    bar(1082,90,1118,100);
+    setfillstyle(4,BROWN);
+    bar(1098,100,1103,150);               //third
+    
+    
+   circle(1100+15,200,50);                   //fourth
+    circle(1100,184,2);
+    circle(1135,191,2);
+    line(1112,205,1110,215);
+    line(1090,230,1120,236);
+    
+    line(1100,250,1100,325);               
+    line(1100,325,1138,311);
+    line(1100-38,325-14,1100,325);
+    line(1138,311,1154,253);               //fifth
+    line(1062,311,1062-16,253);
+    
+    line(1100,325,1100,430);
+    line(1100,430,1100+63,430+108);        //sixth
+    line(1100,430,1100-63,430+108);
+}    
+void hang(int a)
+{
+    char easy[14][7]={"abacus","browse","chrome","domain","ebooks","fusion","hacker",
+    "laptop","number","google","tablet","recoil","switch","piston"};
+    char temp[21];
+    char ch[12];
+    //strcpy(temp,"_ _ _ _ _ _");
+    int j=0,num=1,flag=0,count=6;
+    
+    for(int g=1;g<6;g++)
+    temp[2*g-1]=' ';
+    
+    for(int g=2;g<6;g++)
+    temp[2*g]='_'; 
+            
+    
+    temp[0]=easy[a][0];
+    temp[2]=easy[a][1];
+    
+   // outtextxy(10,450,"Entered Letters: \n\n");
+  //  outtextxy(10,500,ch);
+   // outtextxy(10,10,temp);
+  //  getch();
+do
+{
+    initwindow(1366,720,"Hangman");
+    if(j==0)
+    outtextxy(10,10,temp);
+    
+    if(j>0)
+    {
+           outtextxy(10,450,"Entered Letters: \n\n");
+           outtextxy(10,500,ch);
+           outtextxy(10,10,temp);
+    }
+
+           
+
+    
+    if(num==0)   
+    count--;    
+
+    if(count==5)
+          one();
+    else if(count==4)
+          two();
+    else if(count==3)
+          three();
+    else if(count==2)
+          four();      
+    else if(count==1)
+          five();
+    else if(count==0)
+    {
+          six();          
+          delay(1000);
+         last();    
+    }
+    ch[j]=getch();
+    ch[j]=tolower(ch[j]);
+    num=0;
+                                                                    //ch[j+1]='\o';
+        
+    for(int i=2;i<6;i++)
+    {        
+        if(ch[j]==easy[a][i])
+        {
+             temp[2*i]=ch[j];
+             num=1;
+        }
+    }
+    for(int i=0;i<6;i++)                                                           //Check for win
+    {
+        if(temp[2*i]==easy[a][i])
+        flag=1;
+              
+        else
+        {
+            flag=0;
+            break;
+        }     
+    }
+             
+    if(count==0)
+    break;
+    ch[j+1]='\0';
+
+    
+    j++;
+}while(flag==0);
+
+
+if(flag==1)
+{
+           //initwindow(1366,720,"Hangman");
+           outtextxy(10,450,"Entered Letters: \n\n");
+           outtextxy(10,500,ch);
+           outtextxy(10,10,temp);
+           outtextxy(600,350,"You won, moron!");
+           switch(easy[a][0])
+           {   
+              case 'a':outtextxy(600,400,"This is the password to folder 1");
+                       outtextxy(600,450,temp);
+              break;          
+              case 'b':outtextxy(600,400,"This is the password to folder 2");
+                       outtextxy(600,450,temp);
+              break;
+              case 'c':outtextxy(600,400,"This is the password to folder 3");
+                       outtextxy(600,450,temp);
+              break;
+              case 'd':outtextxy(600,400,"This is the password to folder 4");
+                       outtextxy(600,450,temp);
+              break;
+              case 'e':outtextxy(600,400,"This is the password to folder 5");
+                       outtextxy(600,450,temp);
+              break;
+              case 'f':outtextxy(600,400,"This is the password to folder 6");
+                       outtextxy(600,450,temp);
+              break;
+              case 'g':outtextxy(600,400,"This is the password to folder 10");
+                       outtextxy(600,450,temp);
+              break;
+              case 'h':outtextxy(600,400,"This is the password to folder 7");
+                       outtextxy(600,450,temp);
+              break;
+              case 'l':outtextxy(600,400,"This is the password to folder 8");
+                       outtextxy(600,450,temp);
+              break;
+              case 'n':outtextxy(600,400,"This is the password to folder 9");
+                       outtextxy(600,450,temp);
+              break;
+              case 'p':outtextxy(600,400,"This is the password to folder 14");
+                       outtextxy(600,450,temp);
+              break;
+              case 'r':outtextxy(600,400,"This is the password to folder 12");
+                       outtextxy(600,450,temp);
+              break;
+              case 's':outtextxy(600,400,"This is the password to folder 13");
+                       outtextxy(600,450,temp);
+              break;
+              case 't':outtextxy(600,400,"This is the password to folder 11");
+                       outtextxy(600,450,temp);
+              break;
+}    
+
+           getch();   
+}
+
+           
+}
+ 
+int main()
+{    
+    initwindow(1366,720,"Hangman"); 
+    srand(time(0));
+    int random;
+    random=rand()%14;
+    cout<<random;
+    hang(random);
+    return 0;
+}
